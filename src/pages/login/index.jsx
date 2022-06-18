@@ -1,6 +1,17 @@
 import Link from 'next/link'
+import { useForm } from 'react-hook-form'
+import axios from 'axios'
 
-export default function Index() {
+const Login = () => {
+    const { register, handleSubmit } = useForm()
+
+    const handleSignIn = async formData => {
+        // alert(JSON.stringify(data))
+        const response = await axios.post('http://backend-admin.nettdesk.com.br/api/v1/login')
+
+        console.log(response.data)
+    }
+
     return (
         <div className="auth-fluid">
             <div className="auth-fluid-form-box">
@@ -14,10 +25,10 @@ export default function Index() {
                             </Link>
                         </div>
 
-                        <form method="POST" action="">
+                        <form method="POST" onSubmit={handleSubmit(handleSignIn)}>
                             <div className="form-group">
                                 <label>Email</label>
-                                <input type="email" name="email" className="form-control" placeholder="Email" />
+                                <input {...register('email')} type="email" name="email" className="form-control" placeholder="Email" />
                             </div>
 
                             <div className="form-group">
@@ -28,7 +39,7 @@ export default function Index() {
                                 </Link>
 
                                 <label>Password</label>
-                                <input type="password" name="password" className="form-control" placeholder="Password" />
+                                <input {...register('password')} type="password" name="password" className="form-control" placeholder="Password" />
                             </div>
 
                             <div className="form-group mb-0 text-center">
@@ -56,3 +67,5 @@ export default function Index() {
         </div>
     )
 }
+
+export default Login
