@@ -1,15 +1,40 @@
+import { useState } from 'react'
+
+import Router from 'next/router'
 import Link from 'next/link'
+import Image from 'next/image'
+
 import { useForm } from 'react-hook-form'
-import axios from 'axios'
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { api } from '../../services'
+
+const schema = yup.object().shape({
+    username: yup.string().email().required().label('email'),
+    password: yup.string().required(),
+});
 
 const Login = () => {
-    const { register, handleSubmit } = useForm()
+    const [hasError, setHasError] = useState(false)
+    const [loading, setLoading] = useState(false)
 
-    const handleSignIn = async formData => {
-        // alert(JSON.stringify(data))
-        const response = await axios.post('http://backend-admin.nettdesk.com.br/api/v1/login')
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(schema),
+    })
 
-        console.log(response.data)
+    const handleSignIn = async payload => {
+        try {
+            setLoading(true)
+            const response = await api.post('login', payload)
+
+            localStorage.setItem('token', response.access_token)
+
+            Router.push('/dashboard')
+        } catch (error) {
+            setLoading(false)
+            setHasError(true)
+        }
     }
 
     return (
@@ -20,15 +45,25 @@ const Login = () => {
                         <div className="text-center">
                             <Link href="/login">
                                 <a>
-                                    <img src="/static/images/logo.png" alt="Logo"  />
+                                    <Image src="/static/images/logo.png" width="200" height="180" alt="App Logo" />
                                 </a>
                             </Link>
                         </div>
 
-                        <form method="POST" onSubmit={handleSubmit(handleSignIn)}>
+                        { !!hasError && 
+                                <div className="alert alert-danger">
+                                    <button type="button" className="close" data-dismiss="alert">×</button>
+                                    <ul className="display-errors">
+                                        <li>Usuário ou senha inválidos.</li>
+                                    </ul>
+                                </div>
+                        }
+
+                        <form onSubmit={handleSubmit(handleSignIn)}>
                             <div className="form-group">
                                 <label>Email</label>
-                                <input {...register('email')} type="email" name="email" className="form-control" placeholder="Email" />
+                                <input {...register('username')} type="email" name="username" className="form-control" placeholder="Email" />
+                                <p>{errors.username?.message}</p>
                             </div>
 
                             <div className="form-group">
@@ -40,11 +75,13 @@ const Login = () => {
 
                                 <label>Password</label>
                                 <input {...register('password')} type="password" name="password" className="form-control" placeholder="Password" />
+                                <p>{errors.password?.message}</p>
                             </div>
 
                             <div className="form-group mb-0 text-center">
-                                <button className="btn btn-success btn-block" type="submit">
-                                    <i className="fa fa-check"></i> Sign In
+                                <button type="submit" className="btn btn-success btn-block">
+                                    { loading && <><i className="fa fa-spin fa-spinner"></i>Logging...</>}
+                                    {! loading && <><i className="fa fa-check"></i> Sign In</>}
                                 </button>
                             </div>
                         </form>
@@ -62,7 +99,7 @@ const Login = () => {
                 </div>
             </div>
             <div className="auth-bg">
-                <img src="/static/images/bg-login.png" width="70%" />
+                <Image src="/static/images/bg-login.svg" width="700" height="700" alt="Login BG" />
             </div>
         </div>
     )
