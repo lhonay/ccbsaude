@@ -36,6 +36,30 @@ const Sidebar = () => {
                 </li>
 
                 <li className="side-nav-item">
+                    <Link href="/profile">
+                        <a className="side-nav-link">
+                            <i className="fa fa-user"></i> Profile 
+                        </a>
+                    </Link>
+                </li>
+
+                <li className="side-nav-item">
+                    <Link href="/groups">
+                        <a className="side-nav-link">
+                            <i className="fa fa-list"></i> Groups 
+                        </a>
+                    </Link>
+                </li>
+
+                <li className="side-nav-item">
+                    <Link href="/users">
+                        <a className="side-nav-link">
+                            <i className="fa fa-users"></i> Users 
+                        </a>
+                    </Link>
+                </li>
+
+                <li className="side-nav-item">
                     <Link href="#">
                         <a className="side-nav-link" onClick={logout}>
                             <i className="fa fa-power-off"></i> Logout 

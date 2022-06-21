@@ -9,7 +9,7 @@ const Navbar = () => {
                     <a className="topnav-logo">
                         <span className="topnav-logo-lg">
                             <Image 
-                                src="static/images/logo-w.png" 
+                                src="/static/images/logo-w.png" 
                                 width="40" 
                                 height="40" 
                                 alt="HelpDesk Logo" 
