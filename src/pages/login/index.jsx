@@ -50,20 +50,20 @@ const Login = () => {
                             </Link>
                         </div>
 
-                        { !!hasError && 
-                                <div className="alert alert-danger">
-                                    <button type="button" className="close" data-dismiss="alert">×</button>
-                                    <ul className="display-errors">
-                                        <li>Usuário ou senha inválidos.</li>
-                                    </ul>
-                                </div>
+                        {hasError && 
+                            <div className="alert alert-danger">
+                                <button type="button" className="close" data-dismiss="alert">×</button>
+                                <ul className="display-errors">
+                                    <li>Usuário ou senha inválidos.</li>
+                                </ul>
+                            </div>
                         }
 
-                        <form onSubmit={handleSubmit(handleSignIn)}>
+                        <form className="mb-1" onSubmit={handleSubmit(handleSignIn)}>
                             <div className="form-group">
                                 <label>Email</label>
-                                <input {...register('username')} type="email" name="username" className="form-control" placeholder="Email" />
-                                <p>{errors.username?.message}</p>
+                                <input {...register('username')} type="email" name="username" className={`form-control ${errors.username?.message && 'is-invalid'}`} placeholder="Email" />
+                                <span className="invalid-feedback">{errors.username?.message}</span>
                             </div>
 
                             <div className="form-group">
@@ -74,14 +74,16 @@ const Login = () => {
                                 </Link>
 
                                 <label>Password</label>
-                                <input {...register('password')} type="password" name="password" className="form-control" placeholder="Password" />
-                                <p>{errors.password?.message}</p>
+                                <input {...register('password')} type="password" name="password" className={`form-control ${errors.password?.message && 'is-invalid'}`} placeholder="Password" />
+                                <span className="invalid-feedback">{errors.password?.message}</span>
                             </div>
 
                             <div className="form-group mb-0 text-center">
                                 <button type="submit" className="btn btn-success btn-block">
-                                    { loading && <><i className="fa fa-spin fa-spinner"></i>Logging...</>}
-                                    {! loading && <><i className="fa fa-check"></i> Sign In</>}
+                                    { loading 
+                                        ? <span><i className="fa fa-spin fa-spinner"></i> Logging...</span>
+                                        : <span><i className="fa fa-check"></i> Sign In</span>
+                                    }
                                 </button>
                             </div>
                         </form>
@@ -99,7 +101,7 @@ const Login = () => {
                 </div>
             </div>
             <div className="auth-bg">
-                <Image src="/static/images/bg-login.svg" width="700" height="700" alt="Login BG" />
+                <Image src="/static/images/bg-login.svg" width="650" height="650" alt="Login BG" />
             </div>
         </div>
     )

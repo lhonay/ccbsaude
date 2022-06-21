@@ -27,7 +27,7 @@ const Dashboard = () => {
 
     return (
         <div className="content">
-            { loading && <p>loading</p>}
+            { loading && <p>loading</p> }
             <div>
                 {users.map(user => 
                     <p key={user.id}>{user.name}</p>
