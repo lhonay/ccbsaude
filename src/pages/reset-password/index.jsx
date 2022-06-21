@@ -16,22 +16,18 @@ const schema = yup.object().shape({
 
 const ResetPassword = () => {
     const [apiErrors, setApiErrors] = useState([])
+    const [message, setMessage] = useState(null)
     const [loading, setLoading] = useState(false)
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
     })
 
-    const handleSignIn = async payload => {
+    const handleResetPassword = async payload => {
         try {
             setLoading(true)
             const response = await api.post('password/reset', payload)
-            alert(response.message)
-
-            setLoading(false)
-
-
-            // Router.push('/dashboard')
+            setMessage(response.message)
         } catch ({ response }) {
             if (response.status === 422) {
                 const newErrors = Object.keys(response.data.errors).map(error => ([
@@ -44,7 +40,7 @@ const ResetPassword = () => {
             if (response.status === 404) {
                 setApiErrors([response.data.message])
             }
-
+        } finally {
             setLoading(false)
         }
     }
@@ -71,7 +67,14 @@ const ResetPassword = () => {
                             </div>
                         }
 
-                        <form className="mb-1" onSubmit={handleSubmit(handleSignIn)}>
+                        {message && 
+                            <div className="alert alert-success">
+                                <button type="button" className="close" data-dismiss="alert">×</button>
+                                {message}
+                            </div>
+                        }
+
+                        <form className="mb-1" onSubmit={handleSubmit(handleResetPassword)}>
                             <div className="form-group">
                                 <label>Email</label>
                                 <input {...register('email')} type="email" name="email" className={`form-control ${errors.email?.message && 'is-invalid'}`} placeholder="Email" />

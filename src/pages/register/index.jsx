@@ -11,31 +11,41 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { api } from '../../services'
 
 const schema = yup.object().shape({
-    name: yup.string().email().required(),
+    name: yup.string().required(),
     email: yup.string().email().required(),
     password: yup.string().min(8).required(),
     password_confirmation: yup.string().min(8).required(),
 })
 
 const Register = () => {
-    const [hasError, setHasError] = useState(false)
+    const [apiErrors, setApiErrors] = useState([])
+    const [message, setMessage] = useState(null)
     const [loading, setLoading] = useState(false)
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
     })
 
-    const handleSignIn = async payload => {
+    const handleRegister = async payload => {
         try {
             setLoading(true)
-            const response = await api.post('login', payload)
+            const response = await api.post('register', payload)
 
-            localStorage.setItem('token', response.access_token)
+            Router.push('login')
+        } catch ({ response }) {
+            if (response.status === 422) {
+                const newErrors = Object.keys(response.data.errors).map(error => ([
+                    response.data.errors[error][0]
+                ]))
 
-            Router.push('/dashboard')
-        } catch (error) {
+                setApiErrors(newErrors)
+            }
+            
+            if (response.status === 404) {
+                setApiErrors([response.data.message])
+            }
+        } finally {
             setLoading(false)
-            setHasError(true)
         }
     }
 
@@ -52,37 +62,44 @@ const Register = () => {
                             </Link>
                         </div>
 
-                        {hasError && 
+                        {apiErrors.length > 0 && 
                             <div className="alert alert-danger">
                                 <button type="button" className="close" data-dismiss="alert">×</button>
                                 <ul className="display-errors">
-                                    <li>Usuário ou senha inválidos.</li>
+                                    {apiErrors.map((error, index) => <li key={index}>{error}</li>)}
                                 </ul>
                             </div>
                         }
 
-                        <form className="mb-1" onSubmit={handleSubmit(handleSignIn)}>
+                        {message && 
+                            <div className="alert alert-success">
+                                <button type="button" className="close" data-dismiss="alert">×</button>
+                                {message}
+                            </div>
+                        }
+
+                        <form className="mb-1" onSubmit={handleSubmit(handleRegister)}>
                             <div className="form-group">
                                 <label>Name</label>
-                                <input {...register('name')} type="text" name="name" className={`form-control ${errors.name?.message && 'is-invalid'}`} placeholder="Name" />
+                                <input {...register('name')} type="text" name="name" className={`form-control ${errors?.name && 'is-invalid'}`} placeholder="Name" />
                                 <span className="invalid-feedback">{errors.name?.message}</span>
                             </div>
                             
                             <div className="form-group">
                                 <label>Email</label>
-                                <input {...register('email')} type="email" name="username" className={`form-control ${errors.email?.message && 'is-invalid'}`} placeholder="Email" />
+                                <input {...register('email')} type="email" name="email" className={`form-control ${errors?.email && 'is-invalid'}`} placeholder="Email" />
                                 <span className="invalid-feedback">{errors.email?.message}</span>
                             </div>
 
                             <div className="form-group">
                                 <label>Password</label>
-                                <input {...register('password')} type="password" name="password" className={`form-control ${errors.password?.message && 'is-invalid'}`} placeholder="Password" />
+                                <input {...register('password')} type="password" name="password" className={`form-control ${errors?.password && 'is-invalid'}`} placeholder="Password" />
                                 <span className="invalid-feedback">{errors.password?.message}</span>
                             </div>
 
                             <div className="form-group">
                                 <label>Confirm Password</label>
-                                <input {...register('password_confirmation')} type="password" name="password_confirmation" className={`form-control ${errors.password_confirmation?.message && 'is-invalid'}`} placeholder="Confirm Password" />
+                                <input {...register('password_confirmation')} type="password" name="password_confirmation" className={`form-control ${errors?.password_confirmation && 'is-invalid'}`} placeholder="Confirm Password" />
                                 <span className="invalid-feedback">{errors.password_confirmation?.message}</span>
                             </div>
 

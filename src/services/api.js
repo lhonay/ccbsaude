@@ -30,7 +30,7 @@ api.interceptors.response.use(response => response.data, error => {
     }
 
     if (error.response.status == 401) {
-        // localStorage.removeItem('access_token')
+        // localStorage.removeItem('token')
     }
 
     if (error.response.status == 500) {

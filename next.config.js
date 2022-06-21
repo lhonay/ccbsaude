@@ -1,12 +1,15 @@
 module.exports = {
-  reactStrictMode: true,
+    reactStrictMode: true,
     async redirects() {
-      return [
-        {
-          source: '/',
-          destination: '/login',
-          permanent: true,
-        },
-      ]
+        return [
+            {
+                source: '/',
+                destination: '/login',
+                permanent: true,
+            },
+        ]
     },
+    images: {
+        domains: ['backend-admin.nettdesk.com.br']
+    }
 }
