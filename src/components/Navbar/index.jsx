@@ -8,7 +8,12 @@ const Navbar = () => {
                 <Link href="/dashboard">
                     <a className="topnav-logo">
                         <span className="topnav-logo-lg">
-                            <img src="static/images/logo-w.png" alt="HelpDesk Logo" height="40" />
+                            <Image 
+                                src="static/images/logo-w.png" 
+                                width="40" 
+                                height="40" 
+                                alt="HelpDesk Logo" 
+                            />
                         </span>
                     </a>
                 </Link>
