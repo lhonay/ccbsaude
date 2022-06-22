@@ -1,18 +1,10 @@
-import { useState, useEffect } from "react";
+import { parseCookies } from 'nookies'
 
-import Router from "next/router";
-import Link from "next/link";
+import { getAPIClient } from '../../services'
 
 import { AdminLayout } from '../../components'
 
-import { api } from "../../services";
-
-const Dashboard = () => {
-    const [loading, setLoading] = useState(false)
-    const [users, setUsers] = useState([])
-
-    useEffect(() => {
-    }, [])
+const Dashboard = ({ user }) => {
 
     return (
         <AdminLayout>
@@ -21,7 +13,7 @@ const Dashboard = () => {
                     <div className="card">
                         <div className="card-body py-2">
                             <h4 className="page-title">
-                                <i className="fa fa-tachometer-alt title-icon mr-1"></i> Dashboard
+                                <i className="fa fa-tachometer-alt title-icon mr-1"></i> Dashboard - {user?.name}
                             </h4>
                         </div>
                     </div>
@@ -62,5 +54,27 @@ const Dashboard = () => {
         </AdminLayout>
     )
 }
+
+export async function getServerSideProps(context) {
+    const apiClient = getAPIClient(context)
+    const { ['nextadmin.token']: token } = parseCookies(context)
+  
+    if (! token) {
+        return {
+            redirect: {
+                destination: '/login',
+                permanent: false,
+            }
+        }
+    }
+  
+    const { data } = await apiClient.get('profile')
+  
+    return {
+        props: {
+            user: data,
+        }
+    }
+  }
 
 export default Dashboard

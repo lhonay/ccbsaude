@@ -1,14 +1,11 @@
-import Link from "next/link"
-import Image from "next/image"
-import { useRouter } from 'next/router'
+import Link from 'next/link'
+import Image from 'next/image'
+
+import { useAuth } from '../../hooks'
 
 const Sidebar = () => {
-    const router = useRouter()
+    const { logOut } = useAuth()
 
-    const logout = () => {
-        router.push('login')
-    }
-    
     return (
         <div className="left-side-menu left-side-menu-detached content-main">
             <div className="leftbar-user">
@@ -61,7 +58,7 @@ const Sidebar = () => {
 
                 <li className="side-nav-item">
                     <Link href="#">
-                        <a className="side-nav-link" onClick={logout}>
+                        <a className="side-nav-link" onClick={logOut}>
                             <i className="fa fa-power-off"></i> Logout 
                         </a>
                     </Link>

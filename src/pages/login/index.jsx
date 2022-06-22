@@ -1,41 +1,14 @@
-import { useState } from 'react'
-
-import Router from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
 
 import { useForm } from 'react-hook-form'
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import schema from './schema'
 
-import { api } from '../../services'
-
-const schema = yup.object().shape({
-    username: yup.string().email().required().label('email'),
-    password: yup.string().required(),
-});
+import { useAuth } from '../../hooks'
 
 const Login = () => {
-    const [hasError, setHasError] = useState(false)
-    const [loading, setLoading] = useState(false)
-
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema),
-    })
-
-    const handleSignIn = async payload => {
-        try {
-            setLoading(true)
-            const response = await api.post('login', payload)
-
-            localStorage.setItem('token', response.access_token)
-
-            Router.push('/dashboard')
-        } catch (error) {
-            setLoading(false)
-            setHasError(true)
-        }
-    }
+    const { register, handleSubmit, formState: { errors } } = useForm(schema)
+    const { loading, error, signIn } = useAuth()
 
     return (
         <div className="auth-fluid">
@@ -50,16 +23,16 @@ const Login = () => {
                             </Link>
                         </div>
 
-                        {hasError && 
+                        {error && 
                             <div className="alert alert-danger">
                                 <button type="button" className="close" data-dismiss="alert">×</button>
                                 <ul className="display-errors">
-                                    <li>Usuário ou senha inválidos.</li>
+                                    <li>Invalid User or Password</li>
                                 </ul>
                             </div>
                         }
 
-                        <form className="mb-1" onSubmit={handleSubmit(handleSignIn)}>
+                        <form className="mb-1" onSubmit={handleSubmit(signIn)}>
                             <div className="form-group">
                                 <label>Email</label>
                                 <input {...register('username')} type="email" name="username" className={`form-control ${errors.username?.message && 'is-invalid'}`} placeholder="Email" />
@@ -95,7 +68,7 @@ const Login = () => {
                         </Link>
 
                         <p className="text-center text-muted mt-2">
-                            &copy; HelpDesk | All rights reserved.
+                            &copy HelpDesk | All rights reserved.
                         </p>
                     </div>
                 </div>
