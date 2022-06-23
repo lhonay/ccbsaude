@@ -1,53 +1,14 @@
-import { useState } from 'react'
-
-import Router from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
 
 import { useForm } from 'react-hook-form'
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import schema from './schema'
 
-import { api } from '../../services'
-
-const schema = yup.object().shape({
-    name: yup.string().required(),
-    email: yup.string().email().required(),
-    password: yup.string().min(8).required(),
-    password_confirmation: yup.string().min(8).required(),
-})
+import { useRegister } from '../../hooks'
 
 const Register = () => {
-    const [apiErrors, setApiErrors] = useState([])
-    const [message, setMessage] = useState(null)
-    const [loading, setLoading] = useState(false)
-
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema),
-    })
-
-    const handleRegister = async payload => {
-        try {
-            setLoading(true)
-            const response = await api.post('register', payload)
-
-            Router.push('login')
-        } catch ({ response }) {
-            if (response.status === 422) {
-                const newErrors = Object.keys(response.data.errors).map(error => ([
-                    response.data.errors[error][0]
-                ]))
-
-                setApiErrors(newErrors)
-            }
-            
-            if (response.status === 404) {
-                setApiErrors([response.data.message])
-            }
-        } finally {
-            setLoading(false)
-        }
-    }
+    const { register, handleSubmit, formState: { errors } } = useForm(schema)
+    const { loading, apiErrors, signUp } = useRegister()
 
     return (
         <div className="auth-fluid">
@@ -71,14 +32,7 @@ const Register = () => {
                             </div>
                         }
 
-                        {message && 
-                            <div className="alert alert-success">
-                                <button type="button" className="close" data-dismiss="alert">×</button>
-                                {message}
-                            </div>
-                        }
-
-                        <form className="mb-1" onSubmit={handleSubmit(handleRegister)}>
+                        <form className="mb-1" onSubmit={handleSubmit(signUp)}>
                             <div className="form-group">
                                 <label>Name</label>
                                 <input {...register('name')} type="text" name="name" className={`form-control ${errors?.name && 'is-invalid'}`} placeholder="Name" />

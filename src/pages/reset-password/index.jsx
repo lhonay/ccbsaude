@@ -1,49 +1,14 @@
-import { useState } from 'react'
-
-import Router from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
 
 import { useForm } from 'react-hook-form'
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import schema from './schema'
 
-import { api } from '../../services'
-
-const schema = yup.object().shape({
-    email: yup.string().email().required().label('email'),
-});
+import { useResetPassword } from '../../hooks'
 
 const ResetPassword = () => {
-    const [apiErrors, setApiErrors] = useState([])
-    const [message, setMessage] = useState(null)
-    const [loading, setLoading] = useState(false)
-
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema),
-    })
-
-    const handleResetPassword = async payload => {
-        try {
-            setLoading(true)
-            const response = await api.post('password/reset', payload)
-            setMessage(response.message)
-        } catch ({ response }) {
-            if (response.status === 422) {
-                const newErrors = Object.keys(response.data.errors).map(error => ([
-                    response.data.errors[error][0]
-                ]))
-
-                setApiErrors(newErrors)
-            }
-            
-            if (response.status === 404) {
-                setApiErrors([response.data.message])
-            }
-        } finally {
-            setLoading(false)
-        }
-    }
+    const { register, handleSubmit, formState: { errors } } = useForm(schema)
+    const { loading, success, apiErrors, resetPassword } = useResetPassword()
 
     return (
         <div className="auth-fluid">
@@ -67,14 +32,14 @@ const ResetPassword = () => {
                             </div>
                         }
 
-                        {message && 
+                        {success && 
                             <div className="alert alert-success">
                                 <button type="button" className="close" data-dismiss="alert">×</button>
-                                {message}
+                                {success}
                             </div>
                         }
 
-                        <form className="mb-1" onSubmit={handleSubmit(handleResetPassword)}>
+                        <form className="mb-1" onSubmit={handleSubmit(resetPassword)}>
                             <div className="form-group">
                                 <label>Email</label>
                                 <input {...register('email')} type="email" name="email" className={`form-control ${errors.email?.message && 'is-invalid'}`} placeholder="Email" />

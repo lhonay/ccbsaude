@@ -44,6 +44,8 @@ export const AuthProvider = ({ children }) => {
 
             await getUser()
 
+            setError(false)
+
             router.push('/dashboard')
         } catch (error) {
             setError(true)
