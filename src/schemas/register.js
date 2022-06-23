@@ -9,6 +9,8 @@ const schema = yup.object().shape({
         .oneOf([yup.ref('password')], 'Your passwords do not match.'),
 })
 
-export default {
+const resolver = {
     resolver: yupResolver(schema)
 }
+
+export default resolver

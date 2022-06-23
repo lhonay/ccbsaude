@@ -2,9 +2,12 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 const schema = yup.object().shape({
-    email: yup.string().email().required(),
+    username: yup.string().email().required().label('email'),
+    password: yup.string().required(),
 })
 
-export default {
+const resolver = {
     resolver: yupResolver(schema)
 }
+
+export default resolver

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import { useForm } from 'react-hook-form'
-import schema from './schema'
+import schema from '../../schemas/login'
 
 import { useAuth } from '../../hooks'
 
