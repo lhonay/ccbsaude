@@ -1,4 +1,4 @@
-import { AdminLayout } from '../../../components'
+import { AdminLayout } from '@/components'
 
 const Dashboard = () => {
 

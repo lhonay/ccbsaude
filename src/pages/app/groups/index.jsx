@@ -3,9 +3,9 @@ import { useState, useEffect } from "react"
 import Router from "next/router"
 import Link from "next/link"
 
-import { AdminLayout } from '../../../components'
+import { api } from "@/services"
 
-import { api } from "../../../services"
+import { AdminLayout } from '@/components'
 
 const Groups = () => {
     const [loading, setLoading] = useState(false)

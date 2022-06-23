@@ -1,7 +1,7 @@
 import Image from 'next/image'
-import { getAPIClient } from '../../../services'
+import { getAPIClient } from '@/services'
 
-import { AdminLayout } from '../../../components'
+import { AdminLayout } from '@/components'
 
 export async function getServerSideProps(context) {
     const api = getAPIClient(context)

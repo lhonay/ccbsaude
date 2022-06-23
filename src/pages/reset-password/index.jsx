@@ -2,9 +2,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import { useForm } from 'react-hook-form'
-import schema from '../../schemas/reset-password'
+import schema from '@/schemas/reset-password'
 
-import { useResetPassword } from '../../hooks'
+import { useResetPassword } from '@/hooks'
 
 const ResetPassword = () => {
     const { register, handleSubmit, formState: { errors } } = useForm(schema)

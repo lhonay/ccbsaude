@@ -2,9 +2,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import { useForm } from 'react-hook-form'
-import schema from '../../schemas/register'
+import schema from '@/schemas/register'
 
-import { useRegister } from '../../hooks'
+import { useRegister } from '@/hooks'
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm(schema)

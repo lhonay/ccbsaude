@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { api } from '../services'
-import { formatApiErrors } from '../utils'
+import { api } from '@/services'
+import { formatApiErrors } from '@/utils'
 
 const useResetPassword = () => {
     const [loading, setLoading] = useState(false)

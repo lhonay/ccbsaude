@@ -2,9 +2,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import { useForm } from 'react-hook-form'
-import schema from '../../schemas/login'
+import schema from '@/schemas/login'
 
-import { useAuth } from '../../hooks'
+import { useAuth } from '@/hooks'
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm(schema)

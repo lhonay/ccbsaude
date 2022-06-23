@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
-import { api } from '../services'
-import { formatApiErrors } from '../utils'
+import { api } from '@/services'
+import { formatApiErrors } from '@/utils'
 
 const useRegister = () => {
     const [loading, setLoading] = useState(false)
