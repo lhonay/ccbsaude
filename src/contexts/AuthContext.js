@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }) => {
 
             setError(false)
 
-            router.push('/dashboard')
+            router.push('/app/dashboard')
         } catch (error) {
             setError(true)
         } finally {

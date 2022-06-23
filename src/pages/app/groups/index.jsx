@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 
-import Router from "next/router";
-import Link from "next/link";
+import Router from "next/router"
+import Link from "next/link"
 
-import { AdminLayout } from '../../components'
+import { AdminLayout } from '../../../components'
 
-import { api } from "../../services";
+import { api } from "../../../services"
 
-const Users = () => {
+const Groups = () => {
     const [loading, setLoading] = useState(false)
     const [users, setUsers] = useState([])
 
@@ -21,7 +21,7 @@ const Users = () => {
                     <div className="card">
                         <div className="card-body py-2">
                             <h4 className="page-title">
-                                <i className="fa fa-users title-icon mr-1"></i> Users
+                                <i className="fa fa-list title-icon mr-1"></i> Groups
                             </h4>
                         </div>
                     </div>
@@ -31,4 +31,4 @@ const Users = () => {
     )
 }
 
-export default Users
+export default Groups

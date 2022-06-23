@@ -1,8 +1,7 @@
-import Navbar from "../Navbar"
-import Sidebar from "../Sidebar"
+import Navbar from '../Navbar'
+import Sidebar from '../Sidebar'
 
 const AdminLayout = ({ children }) => {
-
     return (
         <div>
             <Navbar />

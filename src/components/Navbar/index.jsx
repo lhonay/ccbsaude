@@ -5,7 +5,7 @@ const Navbar = () => {
     return (
         <div className="navbar-custom fixed-top topnav-navbar bg-success">
             <div className="container-fluid">
-                <Link href="/dashboard">
+                <Link href="/app/dashboard">
                     <a className="topnav-logo">
                         <span className="topnav-logo-lg">
                             <Image 
@@ -19,7 +19,7 @@ const Navbar = () => {
                 </Link>
 
                 <ul className="navbar-nav list-unstyled topbar-right-menu float-right">
-                    <Link href="/profile">
+                    <Link href="/app/profile">
                         <a className="nav-link">
                             <span className="account-user-avatar">
                                 <Image 

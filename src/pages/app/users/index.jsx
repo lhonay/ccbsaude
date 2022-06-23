@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 import Router from "next/router";
 import Link from "next/link";
 
-import { AdminLayout } from '../../components'
+import { AdminLayout } from '../../../components'
 
-import { api } from "../../services";
+import { api } from "../../../services";
 
-const Dashboard = () => {
+const Users = () => {
     const [loading, setLoading] = useState(false)
     const [users, setUsers] = useState([])
 
@@ -21,7 +21,7 @@ const Dashboard = () => {
                     <div className="card">
                         <div className="card-body py-2">
                             <h4 className="page-title">
-                                <i className="fa fa-user title-icon mr-1"></i> Profile
+                                <i className="fa fa-users title-icon mr-1"></i> Users
                             </h4>
                         </div>
                     </div>
@@ -31,4 +31,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard
+export default Users

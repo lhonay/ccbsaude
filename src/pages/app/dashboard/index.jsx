@@ -1,10 +1,6 @@
-import { parseCookies } from 'nookies'
+import { AdminLayout } from '../../../components'
 
-import { getAPIClient } from '../../services'
-
-import { AdminLayout } from '../../components'
-
-const Dashboard = ({ user }) => {
+const Dashboard = () => {
 
     return (
         <AdminLayout>
@@ -13,7 +9,7 @@ const Dashboard = ({ user }) => {
                     <div className="card">
                         <div className="card-body py-2">
                             <h4 className="page-title">
-                                <i className="fa fa-tachometer-alt title-icon mr-1"></i> Dashboard - {user?.name}
+                                <i className="fa fa-tachometer-alt title-icon mr-1"></i> Dashboard
                             </h4>
                         </div>
                     </div>
@@ -54,27 +50,5 @@ const Dashboard = ({ user }) => {
         </AdminLayout>
     )
 }
-
-export async function getServerSideProps(context) {
-    const apiClient = getAPIClient(context)
-    const { ['nextadmin.token']: token } = parseCookies(context)
-  
-    if (! token) {
-        return {
-            redirect: {
-                destination: '/login',
-                permanent: false,
-            }
-        }
-    }
-  
-    const { data } = await apiClient.get('profile')
-  
-    return {
-        props: {
-            user: data,
-        }
-    }
-  }
 
 export default Dashboard

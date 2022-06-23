@@ -9,7 +9,7 @@ const Sidebar = () => {
     return (
         <div className="left-side-menu left-side-menu-detached content-main">
             <div className="leftbar-user">
-                <Link href="/profile">
+                <Link href="/app/profile">
                     <a>
                         <Image 
                             src="http://backend-admin.nettdesk.com.br/assets/images/user-avatar.svg" 
@@ -25,7 +25,7 @@ const Sidebar = () => {
 
             <ul className="metismenu side-nav side-nav-light mt-0">
                 <li className="side-nav-item">
-                    <Link href="/dashboard">
+                    <Link href="/app/dashboard">
                         <a className="side-nav-link">
                             <i className="fa fa-tachometer-alt"></i> Dashboard 
                         </a>
@@ -33,7 +33,7 @@ const Sidebar = () => {
                 </li>
 
                 <li className="side-nav-item">
-                    <Link href="/profile">
+                    <Link href="/app/profile">
                         <a className="side-nav-link">
                             <i className="fa fa-user"></i> Profile 
                         </a>
@@ -41,7 +41,7 @@ const Sidebar = () => {
                 </li>
 
                 <li className="side-nav-item">
-                    <Link href="/groups">
+                    <Link href="/app/groups">
                         <a className="side-nav-link">
                             <i className="fa fa-list"></i> Groups 
                         </a>
@@ -49,7 +49,7 @@ const Sidebar = () => {
                 </li>
 
                 <li className="side-nav-item">
-                    <Link href="/users">
+                    <Link href="/app/users">
                         <a className="side-nav-link">
                             <i className="fa fa-users"></i> Users 
                         </a>
