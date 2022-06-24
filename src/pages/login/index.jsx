@@ -35,7 +35,7 @@ const Login = () => {
                         <form className="mb-1" onSubmit={handleSubmit(signIn)}>
                             <div className="form-group">
                                 <label>Email</label>
-                                <input {...register('username')} type="email" name="username" className={`form-control ${errors.username?.message && 'is-invalid'}`} placeholder="Email" />
+                                <input {...register('username')} type="email" name="username" className={`form-control ${errors?.username && 'is-invalid'}`} placeholder="Email" />
                                 <span className="invalid-feedback">{errors.username?.message}</span>
                             </div>
 
@@ -47,7 +47,7 @@ const Login = () => {
                                 </Link>
 
                                 <label>Password</label>
-                                <input {...register('password')} type="password" name="password" className={`form-control ${errors.password?.message && 'is-invalid'}`} placeholder="Password" />
+                                <input {...register('password')} type="password" name="password" className={`form-control ${errors?.password && 'is-invalid'}`} placeholder="Password" />
                                 <span className="invalid-feedback">{errors.password?.message}</span>
                             </div>
 

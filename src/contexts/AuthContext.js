@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
         const { 'nextadmin.token': token } = parseCookies()
 
         if (token) {
-            getUser()
+            // getUser()
         }
     }, [])
 
@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
     async function logOut() {
         await api.delete('logout')
 
-        destroyCookie(null, 'nextadmin.token')
+        await destroyCookie(null, 'nextadmin.token')
 
         router.push('/login')
     }

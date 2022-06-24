@@ -41,9 +41,9 @@ const Sidebar = () => {
                 </li>
 
                 <li className="side-nav-item">
-                    <Link href="/app/groups">
+                    <Link href="/app/roles">
                         <a className="side-nav-link">
-                            <i className="fa fa-list"></i> Groups 
+                            <i className="fa fa-list"></i> Roles 
                         </a>
                     </Link>
                 </li>

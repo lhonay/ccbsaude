@@ -1,7 +1,8 @@
+import Link from 'next/link'
 import Image from 'next/image'
-import { getAPIClient } from '@/services'
 
-import { AdminLayout } from '@/components'
+import { getAPIClient } from '@/services'
+import { AdminLayout, Status } from '@/components'
 
 export async function getServerSideProps(context) {
     const api = getAPIClient(context)
@@ -29,7 +30,7 @@ const Profile = ({ user }) => {
                     </div>
                 </div>
             </div>
-            <div v-if="!isLoading" className="card">
+            <div className="card">
                 <div className="card-header text-center">
                     <Image 
                         src={user.avatar_url} 
@@ -39,11 +40,13 @@ const Profile = ({ user }) => {
                         alt="User Avatar"
                     />
 
-                    {/* <div className="my-2">
-                        <router-link :to="{name: profile}" className="btn btn-sm btn-outline-success btn-rounded">
-                            <i className="fa fa-edit" /> Alterar Meu Perfil
-                        </router-link>
-                    </div> */}
+                    <div className="my-2">
+                        <Link href="/app/profile/edit">
+                            <a className="btn btn-sm btn-outline-success btn-rounded">
+                                <i className="fa fa-edit" /> Alterar Meu Perfil
+                            </a>
+                        </Link>
+                    </div>
                 </div>
                 <div className="card-body">
                     <div className="col-md-12">
@@ -82,7 +85,7 @@ const Profile = ({ user }) => {
                             <label className="col-sm-2 col-form-label">Status</label>
                             <div className="col-md-9">
                                 <p className="form-control-plaintext">
-                                    {/* <Status :status="user.status" /> */}
+                                    <Status status={user.status} />
                                 </p>
                             </div>
                         </div>

@@ -1,19 +1,6 @@
-import { useState, useEffect } from "react"
-
-import Router from "next/router"
-import Link from "next/link"
-
-import { api } from "@/services"
-
 import { AdminLayout } from '@/components'
 
-const Groups = () => {
-    const [loading, setLoading] = useState(false)
-    const [users, setUsers] = useState([])
-
-    useEffect(() => {
-    }, [])
-
+const ProfileEdit = ({ user }) => {
     return (
         <AdminLayout>
             <div className="row">
@@ -21,14 +8,16 @@ const Groups = () => {
                     <div className="card">
                         <div className="card-body py-2">
                             <h4 className="page-title">
-                                <i className="fa fa-list title-icon mr-1"></i> Groups
+                                <i className="fa fa-user title-icon mr-1"></i> Edit Profile
                             </h4>
                         </div>
                     </div>
                 </div>
             </div>
+            <div className="card">
+            </div>
         </AdminLayout>
     )
 }
 
-export default Groups
+export default ProfileEdit

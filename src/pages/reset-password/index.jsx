@@ -42,7 +42,7 @@ const ResetPassword = () => {
                         <form className="mb-1" onSubmit={handleSubmit(resetPassword)}>
                             <div className="form-group">
                                 <label>Email</label>
-                                <input {...register('email')} type="email" name="email" className={`form-control ${errors.email?.message && 'is-invalid'}`} placeholder="Email" />
+                                <input {...register('email')} type="email" name="email" className={`form-control ${errors?.email && 'is-invalid'}`} placeholder="Email" />
                                 <span className="invalid-feedback">{errors.email?.message}</span>
                             </div>
 
