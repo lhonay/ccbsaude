@@ -1,6 +1,10 @@
+export { default as AuthLayout } from './Layout/AuthLayout'
 export { default as AdminLayout } from './Layout/AdminLayout'
 export { default as Navbar } from './Layout/Navbar'
 export { default as Sidebar } from './Layout/Sidebar'
 
 export { default as Modal } from './Base/Modal'
+export { default as Alert } from './Base/Alert'
+export { default as Button } from './Base/Button'
+export { default as Errors } from './Base/Errors'
 export { default as Status } from './Base/Status'

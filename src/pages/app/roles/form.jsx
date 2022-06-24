@@ -43,14 +43,14 @@ const RoleForm = ({ visible, role, onClose }) => {
                 <div className="col-12">
                     {success && 
                         <div className="alert alert-success">
-                            <button type="button" className="close" data-dismiss="alert">×</button>
+                            <button type="button" className="close">×</button>
                             {success}
                         </div>
                     }
 
                     {apiErrors.length > 0 && 
                         <div className="alert alert-danger">
-                            <button type="button" className="close" data-dismiss="alert">×</button>
+                            <button type="button" className="close">×</button>
                             <ul className="display-errors">
                                 {apiErrors.map((error, index) => <li key={index}>{error}</li>)}
                             </ul>
