@@ -1,29 +1,31 @@
-import Link from 'next/link'
-
 const Button = ({ meta, onChangePage }) => {
+    const pages = Array.from({ length: meta?.last_page }, (page, index) => index + 1)
+
+    const previous = () => onChangePage(meta?.current_page - 1)
+
+    const next = () => onChangePage(meta?.current_page + 1)
+
     return (
         <nav>
             <ul className="pagination">
-                <li className="page-item">
-                    <Link href="#">
-                        <a className="page-link">
-                            <i className="fa fa-arrow-left"></i>
-                        </a>
-                    </Link>
+                <li className={`page-item ${meta?.current_page === 1 && 'disabled'}`}>
+                    <button className="page-link" onClick={previous}>
+                        <i className="fa fa-arrow-left"></i>
+                    </button>
                 </li>
 
-                {[...Array(meta?.last_page)].map((page, index) =>
-                    <li className={`page-item ${(index+1) == meta?.current_page ? 'active' : ''}`} key={index}>
-                        <button href="#" className="page-link" onClick={() => onChangePage(index+1)}>
-                            {index+1}
+                {pages.map(page =>
+                    <li className={`page-item ${(page) === meta?.current_page && 'active'}`} key={page}>
+                        <button className="page-link" onClick={() => onChangePage(page)}>
+                            {page}
                         </button>
                     </li>
                 )}
 
-                <li className="page-item">
-                    <a href="#" className="page-link">
+                <li className={`page-item ${meta?.current_page === meta?.last_page && 'disabled'}`}>
+                    <button className="page-link" onClick={next}>
                         <i className="fa fa-arrow-right"></i>
-                    </a>
+                    </button>
                 </li>
             </ul>
         </nav>

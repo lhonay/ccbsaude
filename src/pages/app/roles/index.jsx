@@ -11,9 +11,8 @@ import RoleForm from './form'
 
 export async function getServerSideProps(context) {
     const api = getAPIClient(context)
-  
-    const params = context.query
-    const { data, meta } = await api.get('roles', { params })
+
+    const { data, meta } = await api.get('roles', { params: context.query })
   
     return {
         props: {
@@ -35,13 +34,13 @@ const Roles = ({ roles, meta }) => {
     const onChange = event => setSearch(event.target.value)
 
     const refreshData = (page = 1) => {
-        router.replace({
-            pathname: router.pathname,
-            query: {
-                page: page ?? 1, 
-                name: search, 
-            },
-        })
+        const query = { page }
+
+        if (search) {
+            query.name = search
+        }
+
+        router.replace({ pathname: router.pathname, query })
     }
 
     const create = () => {
@@ -71,7 +70,7 @@ const Roles = ({ roles, meta }) => {
                                     <SearchInput 
                                         placeholder='Find by role name'
                                         changeSearch={onChange}
-                                        onSearch={refreshData} 
+                                        onSearch={() => refreshData()} 
                                     />
                                 </div>
                                 <div className="col-md-2">
