@@ -5,7 +5,7 @@ import schema from '@/schemas/roles'
 
 import { useRoles } from '@/hooks'
 
-import { Modal } from '@/components'
+import { Modal, Button, Input, Alert, Errors, Textarea } from '@/components'
 
 const RoleForm = ({ visible, role, onClose }) => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm(schema)
@@ -24,12 +24,11 @@ const RoleForm = ({ visible, role, onClose }) => {
     }, [success])
 
     const renderFooter = () => (
-        <button type="button" className="btn btn-success" onClick={handleSubmit(save)}>
-            {loading
-                ? <span><i className="fa fa-spin fa-spinner"></i> Saving...</span>
-                : <span><i className="fa fa-check"></i> Save</span>
-            }
-        </button>
+        <Button 
+            label={loading ? 'Saving...' : 'Save'}
+            className='btn-success'
+            onClick={handleSubmit(save)}
+        />
     )
 
     return (
@@ -41,33 +40,29 @@ const RoleForm = ({ visible, role, onClose }) => {
         >
             <form>
                 <div className="col-12">
-                    {success && 
-                        <div className="alert alert-success">
-                            <button type="button" className="close">×</button>
-                            {success}
-                        </div>
-                    }
+                    <Alert status='success' message={success} />
+                    <Errors errors={apiErrors} />
 
-                    {apiErrors.length > 0 && 
-                        <div className="alert alert-danger">
-                            <button type="button" className="close">×</button>
-                            <ul className="display-errors">
-                                {apiErrors.map((error, index) => <li key={index}>{error}</li>)}
-                            </ul>
-                        </div>
-                    }
-                
                     <div className="form-row">
                         <div className="form-group col-md-12">
-                            <label>Name *</label>
-                            <input {...register('name', {value: role?.name})} name="name" className={`form-control ${errors?.name && 'is-invalid'}`} placeholder="Name" />
-                            <span className="invalid-feedback">{errors.name?.message}</span>
+                            <Input 
+                                type='text'
+                                name='name'
+                                label='Name *'
+                                errors={errors}
+                                register={register}
+                                model={role}
+                            />
                         </div>
 
                         <div className="form-group col-md-12">
-                            <label>Description *</label>
-                            <textarea {...register('description', {value: role?.description})} name="description" rows={10} className={`form-control ${errors?.description && 'is-invalid'}`} placeholder="Description"></textarea>
-                            <span className="invalid-feedback">{errors.description?.message}</span>
+                            <Textarea 
+                                name='description'
+                                label='Description *'
+                                errors={errors}
+                                register={register}
+                                model={role}
+                            />
                         </div>
                     </div>
                 </div>

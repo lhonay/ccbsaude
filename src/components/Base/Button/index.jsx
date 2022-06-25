@@ -1,9 +1,17 @@
-const Button = ({ label, loading }) => {
-    const icon = loading ? 'fa-spin fa-spinner' : 'fa-check'
+const Button = ({ 
+    icon = 'check', 
+    label, 
+    className, 
+    loading = false,
+    onClick,
+    ...props 
+}) => {
+    const buttonClass = className ?? 'btn-success btn-block'
+    const iconClass = loading ? 'fa-spin fa-spinner' : `fa-${icon}`
 
     return (
-        <button type="submit" className="btn btn-success btn-block">
-            <i className={`fa ${icon}`}></i> {label}
+        <button type="submit" className={`btn ${buttonClass}`} onClick={onClick} {...props}>
+            <i className={`fa ${iconClass}`}></i> {label}
         </button>
     )
 }

@@ -5,7 +5,7 @@ import schema from '@/schemas/reset-password'
 
 import { useResetPassword } from '@/hooks'
 
-import { AuthLayout, Alert, Errors, Button } from '@/components'
+import { AuthLayout, Alert, Errors, Input, Button } from '@/components'
 
 const ResetPassword = () => {
     const { register, handleSubmit, formState: { errors } } = useForm(schema)
@@ -18,9 +18,13 @@ const ResetPassword = () => {
 
             <form className="mb-1" onSubmit={handleSubmit(resetPassword)}>
                 <div className="form-group">
-                    <label>Email</label>
-                    <input {...register('email')} type="email" name="email" className={`form-control ${errors?.email && 'is-invalid'}`} placeholder="Email" />
-                    <span className="invalid-feedback">{errors.email?.message}</span>
+                    <Input 
+                        type='email'
+                        name='email'
+                        label='Email'
+                        errors={errors}
+                        register={register}
+                    />
                 </div>
 
                 <div className="form-group mb-0 text-center">

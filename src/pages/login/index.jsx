@@ -5,7 +5,7 @@ import schema from '@/schemas/login'
 
 import { useAuth } from '@/hooks'
 
-import { AuthLayout, Alert, Button } from '@/components'
+import { AuthLayout, Alert, Input, Button } from '@/components'
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm(schema)
@@ -17,9 +17,13 @@ const Login = () => {
 
             <form className="mb-1" onSubmit={handleSubmit(signIn)}>
                 <div className="form-group">
-                    <label>Email</label>
-                    <input {...register('username')} type="email" name="username" className={`form-control ${errors?.username && 'is-invalid'}`} placeholder="Email" />
-                    <span className="invalid-feedback">{errors.username?.message}</span>
+                    <Input 
+                        type='email'
+                        name='username'
+                        label='Email'
+                        errors={errors}
+                        register={register}
+                    />
                 </div>
 
                 <div className="form-group">
@@ -28,10 +32,14 @@ const Login = () => {
                             <small>Forgot your password?</small>
                         </a>
                     </Link>
-
-                    <label>Password</label>
-                    <input {...register('password')} type="password" name="password" className={`form-control ${errors?.password && 'is-invalid'}`} placeholder="Password" />
-                    <span className="invalid-feedback">{errors.password?.message}</span>
+                    
+                    <Input 
+                        type='password'
+                        name='password'
+                        label='Password'
+                        errors={errors}
+                        register={register}
+                    />
                 </div>
 
                 <div className="form-group mb-0 text-center">

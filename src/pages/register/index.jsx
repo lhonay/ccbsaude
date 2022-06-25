@@ -5,7 +5,7 @@ import schema from '@/schemas/register'
 
 import { useRegister } from '@/hooks'
 
-import { AuthLayout, Errors, Button } from '@/components'
+import { AuthLayout, Errors, Input, Button } from '@/components'
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm(schema)
@@ -17,27 +17,43 @@ const Register = () => {
 
             <form className="mb-1" onSubmit={handleSubmit(signUp)}>
                 <div className="form-group">
-                    <label>Name</label>
-                    <input {...register('name')} type="text" name="name" className={`form-control ${errors?.name && 'is-invalid'}`} placeholder="Name" />
-                    <span className="invalid-feedback">{errors.name?.message}</span>
+                    <Input 
+                        type='text'
+                        name='name'
+                        label='Name *'
+                        errors={errors}
+                        register={register}
+                    />
                 </div>
                 
                 <div className="form-group">
-                    <label>Email</label>
-                    <input {...register('email')} type="email" name="email" className={`form-control ${errors?.email && 'is-invalid'}`} placeholder="Email" />
-                    <span className="invalid-feedback">{errors.email?.message}</span>
+                    <Input 
+                        type='email'
+                        name='email'
+                        label='Email *'
+                        errors={errors}
+                        register={register}
+                    />
                 </div>
 
                 <div className="form-group">
-                    <label>Password</label>
-                    <input {...register('password')} type="password" name="password" className={`form-control ${errors?.password && 'is-invalid'}`} placeholder="Password" />
-                    <span className="invalid-feedback">{errors.password?.message}</span>
+                    <Input 
+                        type='password'
+                        name='password'
+                        label='Confirm Passsword *'
+                        errors={errors}
+                        register={register}
+                    />
                 </div>
 
                 <div className="form-group">
-                    <label>Confirm Password</label>
-                    <input {...register('password_confirmation')} type="password" name="password_confirmation" className={`form-control ${errors?.password_confirmation && 'is-invalid'}`} placeholder="Confirm Password" />
-                    <span className="invalid-feedback">{errors.password_confirmation?.message}</span>
+                    <Input 
+                        type='password'
+                        name='password_confirmation'
+                        label='Confirm Passsword *'
+                        errors={errors}
+                        register={register}
+                    />
                 </div>
 
                 <div className="form-group mb-0 text-center">
