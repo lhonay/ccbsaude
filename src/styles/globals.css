@@ -929,6 +929,16 @@ input[type=submit].btn-block {
     border-radius: .25rem
 }
 
+.alert-success {
+    color: #056c4f;
+    background-color: #cef5ea;
+    border-color: #baf2e2;
+}
+
+.alert-success hr {
+    border-top-color: #a5eed9;
+}
+
 .alert-danger {
     color: #823040;
     background-color: #fedee5;
@@ -1773,6 +1783,8 @@ ul.display-errors {
     border-radius: 10px
 }
 
+/* Font Awesome */
+
 .fa {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
@@ -1891,4 +1903,8 @@ ul.display-errors {
 
 .fa-users:before {
     content: "\f0c0"
+}
+
+.fa-trash:before {
+    content: "\f1f8";
 }

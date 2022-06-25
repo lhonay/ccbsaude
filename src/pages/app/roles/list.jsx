@@ -32,7 +32,7 @@ const RoleList = ({ roles, onEdit, onDelete, pagination, onChangePage }) => {
                                 />
 
                                 <Button
-                                    icon='user'
+                                    icon='trash'
                                     className='btn-sm btn-danger'
                                     onClick={() => onDelete(role.id)}
                                     title="Delete Role"
