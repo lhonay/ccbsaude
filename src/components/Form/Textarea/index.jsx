@@ -1,4 +1,4 @@
-const Textarea = ({ name, label, errors, register, model }) => (
+const Textarea = ({ name, label, errors, register, model = {} }) => (
     <>
         <label>{label}</label>
         <textarea 

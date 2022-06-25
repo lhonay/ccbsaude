@@ -12,8 +12,8 @@ const Button = ({ meta, onChangePage }) => {
                     </Link>
                 </li>
 
-                {[...Array(meta.last_page)].map((page, index) =>
-                    <li className={`page-item ${(index+1) == meta.current_page ? 'active' : ''}`} key={page}>
+                {[...Array(meta?.last_page)].map((page, index) =>
+                    <li className={`page-item ${(index+1) == meta?.current_page ? 'active' : ''}`} key={page}>
                         <button href="#" className="page-link" onClick={() => onChangePage(index+1)}>
                             {index+1}
                         </button>

@@ -24,8 +24,8 @@ const Dashboard = () => {
         <AdminLayout>
             <Header icon='tachometer-alt' title='Dashboard' />
             <div className="row">
-                {menus.map(menu => (
-                    <DashCard {...menu} />
+                {menus.map((menu, index) => (
+                    <DashCard key={index}  {...menu} />
                 ))}
             </div>
         </AdminLayout>

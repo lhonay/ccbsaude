@@ -2,7 +2,7 @@ import { Button, Pagination } from "@/components"
 
 const RoleList = ({ roles, onEdit, onDelete, pagination, onChangePage }) => {
 
-    const emptyRoles = roles.length === 0
+    const emptyRoles = roles?.length === 0
 
     return (
         <div>
@@ -17,7 +17,7 @@ const RoleList = ({ roles, onEdit, onDelete, pagination, onChangePage }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {roles.map(role => (
+                    {roles?.map(role => (
                         <tr key={role.id}>
                             <td>{role.id}</td>
                             <td>{role.name}</td>
