@@ -13,6 +13,8 @@ export { default as Pagination } from './Base/Pagination'
 export { default as SearchInput } from './Base/SearchInput'
 
 export { default as Input } from './Form/Input'
+export { default as Checkbox } from './Form/Checkbox'
 export { default as Textarea } from './Form/Textarea'
+export { default as MultiSelect } from './Form/MultiSelect'
 
 export { default as DashCard } from './Dashboard/DashCard'

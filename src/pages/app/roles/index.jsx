@@ -97,9 +97,12 @@ const Roles = ({ roles, meta }) => {
             <RoleForm
                 visible={showModal}
                 role={role}
-                onClose={() => {
+                isEdit={!!role}
+                onClose={success => {
                     setShowModal(false)
-                    refreshData()
+                    if (success) {
+                        refreshData()
+                    }
                 }}
             />
         </AdminLayout>

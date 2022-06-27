@@ -1,14 +1,14 @@
 import Link from 'next/link'
 
 import { useForm } from 'react-hook-form'
-import schema from '@/schemas/register'
+import { registerSchema } from '@/schemas'
 
 import { useRegister } from '@/hooks'
 
 import { AuthLayout, Errors, Input, Button } from '@/components'
 
 const Register = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm(schema)
+    const { register, handleSubmit, formState: { errors } } = useForm(registerSchema)
     const { loading, apiErrors, signUp } = useRegister()
 
     return (
@@ -40,7 +40,7 @@ const Register = () => {
                     <Input 
                         type='password'
                         name='password'
-                        label='Confirm Passsword *'
+                        label='Password *'
                         errors={errors}
                         register={register}
                     />
@@ -50,7 +50,7 @@ const Register = () => {
                     <Input 
                         type='password'
                         name='password_confirmation'
-                        label='Confirm Passsword *'
+                        label='Confirm Password *'
                         errors={errors}
                         register={register}
                     />

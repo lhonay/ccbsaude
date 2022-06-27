@@ -1,14 +1,14 @@
 import { useEffect } from 'react'
 
 import { useForm } from 'react-hook-form'
-import schema from '@/schemas/roles'
+import { roleSchema } from '@/schemas'
 
 import { useRoles } from '@/hooks'
 
 import { Modal, Button, Input, Alert, Errors, Textarea } from '@/components'
 
-const RoleForm = ({ visible, role, onClose }) => {
-    const { register, handleSubmit, reset, formState: { errors } } = useForm(schema)
+const RoleForm = ({ visible, role, isEdit, onClose }) => {
+    const { register, handleSubmit, reset, formState: { errors } } = useForm(roleSchema)
 
     const { loading, apiErrors, success, initForm, save } = useRoles()
 
@@ -18,7 +18,7 @@ const RoleForm = ({ visible, role, onClose }) => {
     }, [visible])
 
     useEffect(() => {
-        if (! role.id) {
+        if (! isEdit) {
             reset()
         } 
     }, [success])
@@ -35,7 +35,7 @@ const RoleForm = ({ visible, role, onClose }) => {
         <Modal 
             visible={visible}
             title='Create a new Role' 
-            onClose={onClose}
+            onClose={() => onClose(success)}
             renderFooter={renderFooter}
         >
             <form>

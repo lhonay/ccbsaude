@@ -258,6 +258,7 @@ small {
 }
 
 .col-12,
+.col-md-6,
 .col-md-10,
 .col-md-12,
 .col-md-2,
@@ -289,6 +290,13 @@ small {
         max-width: 16.66667%
     }
 
+    .col-md-6 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
     .col-md-9 {
         flex: 0 0 75%;
         max-width: 75%
@@ -315,6 +323,17 @@ small {
         flex: 0 0 100%;
         max-width: 100%
     }
+}
+
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive>.table-bordered {
+    border: 0;
 }
 
 .table {

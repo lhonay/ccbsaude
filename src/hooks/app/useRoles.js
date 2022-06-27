@@ -5,6 +5,7 @@ import { formatApiErrors } from '@/utils'
 
 const useRoles = () => {
     const [role, setRole] = useState({})
+    const [roles, setRoles] = useState([])
     const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState(null)
     const [apiErrors, setApiErrors] = useState([])
@@ -14,6 +15,20 @@ const useRoles = () => {
         setLoading(false)
         setSuccess(null)
         setApiErrors([])
+    }
+
+    const getRolesOptions = async () => {
+        try {
+            setLoading(true)
+
+            const { data } = await api.get('roles')
+
+            setRoles(data)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
+        }
     }
 
     const save = async payload => {
@@ -49,11 +64,12 @@ const useRoles = () => {
     }
 
     return {
+        roles,
         loading,
         success,
         apiErrors,
         initForm,
-        fetch,
+        getRolesOptions,
         save,
         destroy,
     }

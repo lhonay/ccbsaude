@@ -1,14 +1,14 @@
 import Link from 'next/link'
 
 import { useForm } from 'react-hook-form'
-import schema from '@/schemas/login'
+import { loginSchema } from '@/schemas'
 
 import { useAuth } from '@/hooks'
 
 import { AuthLayout, Alert, Input, Button } from '@/components'
 
 const Login = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm(schema)
+    const { register, handleSubmit, formState: { errors } } = useForm(loginSchema)
     const { loading, error, signIn } = useAuth()
 
     return (

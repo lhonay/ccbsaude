@@ -1,14 +1,14 @@
 import Link from 'next/link'
 
 import { useForm } from 'react-hook-form'
-import schema from '@/schemas/reset-password'
+import { resetSchema } from '@/schemas'
 
 import { useResetPassword } from '@/hooks'
 
 import { AuthLayout, Alert, Errors, Input, Button } from '@/components'
 
 const ResetPassword = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm(schema)
+    const { register, handleSubmit, formState: { errors } } = useForm(resetSchema)
     const { loading, success, apiErrors, resetPassword } = useResetPassword()
 
     return (
