@@ -18,7 +18,7 @@ const UserForm = ({ visible, user, isEdit, onClose }) => {
         initForm(user)
         getRolesOptions()
 
-        if (user.roles) {
+        if (user?.roles) {
             setValue('role_keys', user.roles)
         }
     }, [visible])
@@ -81,7 +81,7 @@ const UserForm = ({ visible, user, isEdit, onClose }) => {
                                 control={control}
                                 options={roles}
                                 errors={errors}
-                                selectedValues={user.roles}
+                                selectedValues={user?.roles}
                             />
                         </div>
                     </div>
