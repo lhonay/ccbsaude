@@ -4,7 +4,15 @@ import Image from 'next/image'
 import { useAuth } from '@/hooks'
 
 const Sidebar = () => {
-    const { logOut } = useAuth()
+    const { user, logOut } = useAuth()
+
+    const onLogout = () => {
+        const shouldDelete = confirm('Do you really want logout?')
+        
+        if (shouldDelete) {
+            logOut()
+        }
+    }
 
     return (
         <div className="left-side-menu left-side-menu-detached content-main">
@@ -18,7 +26,7 @@ const Sidebar = () => {
                             height="60" 
                             alt="User Avatar"
                         />
-                        <span className="leftbar-user-name">Rogerio Nunes Leal</span>
+                        <span className="leftbar-user-name">{user?.name}</span>
                     </a>
                 </Link>
             </div>
@@ -58,7 +66,7 @@ const Sidebar = () => {
 
                 <li className="side-nav-item">
                     <Link href="#">
-                        <a className="side-nav-link" onClick={logOut}>
+                        <a className="side-nav-link" onClick={onLogout}>
                             <i className="fa fa-power-off"></i> Logout 
                         </a>
                     </Link>

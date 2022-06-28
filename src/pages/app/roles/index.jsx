@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
+import { toast } from 'react-toastify'
+
 import { useRoles } from '@/hooks'
 import { getAPIClient } from '@/services'
 
@@ -54,8 +56,13 @@ const Roles = ({ roles, meta }) => {
     }
 
     const remove = async id => {
-        await destroy(id)
-        refreshData()
+        const shouldDelete = confirm('Do you really want to delete this role?')
+        
+        if (shouldDelete) {
+            await destroy(id)
+            toast.success('Role deleted successfully!')
+            refreshData()
+        }
     }
 
     return (
@@ -97,12 +104,10 @@ const Roles = ({ roles, meta }) => {
             <RoleForm
                 visible={showModal}
                 role={role}
-                isEdit={!!role}
+                isEdit={!!role?.id}
                 onClose={success => {
                     setShowModal(false)
-                    if (success) {
-                        refreshData()
-                    }
+                    success && refreshData()
                 }}
             />
         </AdminLayout>

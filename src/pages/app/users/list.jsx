@@ -25,7 +25,7 @@ const UserList = ({ users, onEdit, onDelete, pagination, onChangePage }) => {
                             <td>{user.email}</td>
                             <td>{user.created_at}</td>
                             <td className="text-center">
-                                <Status status={user.status} />
+                                <Status status={!!user.status} />
                             </td>
                             <td className="text-center w-15">
                                 <Button 

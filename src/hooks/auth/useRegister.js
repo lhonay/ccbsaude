@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
+import { toast } from 'react-toastify'
+
 import { api } from '@/services'
 import { formatApiErrors } from '@/utils'
 
@@ -15,6 +17,8 @@ const useRegister = () => {
             setLoading(true)
 
             await api.post('register', payload)
+
+            toast.success('registration successfully completed, log in with your credentials!')
 
             router.push('/login')
         } catch ({ response }) {

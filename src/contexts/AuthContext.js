@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
         const { 'nextadmin.token': token } = parseCookies()
 
         if (token) {
-            // getUser()
+            getUser()
         }
     }, [])
 

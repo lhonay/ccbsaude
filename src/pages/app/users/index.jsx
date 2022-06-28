@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
+import { toast } from 'react-toastify'
+
 import { useUsers } from '@/hooks'
 import { getAPIClient } from '@/services'
 
@@ -54,8 +56,13 @@ const Users = ({ users, meta }) => {
     }
 
     const remove = async id => {
-        await destroy(id)
-        refreshData()
+        const shouldDelete = confirm('Do you really want to delete this user?')
+        
+        if (shouldDelete) {
+            await destroy(id)
+            toast.success('User deleted successfully!')
+            refreshData()
+        }
     }
 
     return (
@@ -97,7 +104,7 @@ const Users = ({ users, meta }) => {
             <UserForm
                 visible={showModal}
                 user={user}
-                isEdit={!!user}
+                isEdit={!!user?.id}
                 onClose={success => {
                     setShowModal(false)
 

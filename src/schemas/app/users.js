@@ -8,6 +8,7 @@ const schema = yup.object().shape({
     password: yup.string().nullable(),
     password_confirmation: yup.string().nullable()
         .oneOf([yup.ref('password')], 'Your passwords do not match.'),
+    status: yup.boolean().required(),
 })
 
 const resolver = {
