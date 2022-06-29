@@ -2077,3 +2077,7 @@ ul.display-errors {
 .fa-user-edit:before {
     content: "\f4ff"
 }
+
+.fa-chart-line:before {
+    content: "\f201"
+}

@@ -67,9 +67,9 @@ const Roles = ({ roles, meta }) => {
 
     return (
         <AdminLayout>
+            <Header icon='list' title='Roles' />
             <div className="row">
                 <div className="col-xl-12">
-                    <Header icon='list' title='Roles' />
                     <div className="card">
                         <div className="card-body">
                             <div className="row mb-2">

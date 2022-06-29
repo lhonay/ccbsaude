@@ -65,6 +65,14 @@ const Sidebar = () => {
                 </li>
 
                 <li className="side-nav-item">
+                    <Link href="/app/charts">
+                        <a className="side-nav-link">
+                            <i className="fa fa-chart-line"></i> Charts 
+                        </a>
+                    </Link>
+                </li>
+
+                <li className="side-nav-item">
                     <Link href="#">
                         <a className="side-nav-link" onClick={onLogout}>
                             <i className="fa fa-power-off"></i> Logout 

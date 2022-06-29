@@ -67,9 +67,9 @@ const Users = ({ users, meta }) => {
 
     return (
         <AdminLayout>
+            <Header icon='users' title='Users' />
             <div className="row">
                 <div className="col-xl-12">
-                    <Header icon='users' title='Users' />
                     <div className="card">
                         <div className="card-body">
                             <div className="row mb-2">
