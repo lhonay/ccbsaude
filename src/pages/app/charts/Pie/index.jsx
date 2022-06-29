@@ -31,6 +31,6 @@ export const data = {
   ],
 };
 
-export function PieChart() {
+export default function PieChart() {
   return <Pie data={data}  options={{  maintainAspectRatio: false, }}height={400} />;
 }

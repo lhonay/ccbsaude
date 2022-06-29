@@ -1,8 +1,8 @@
 import { AdminLayout, Header } from '@/components'
 
-import { LineChart } from './Line'
-import { PieChart } from './Pie'
-import { AreaChart } from './Area'
+import LineChart from './Line'
+import PieChart from './Pie'
+import AreaChart from './Area'
 
 const Graphics = () => {
 
