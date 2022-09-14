@@ -52,10 +52,10 @@ const Info = ({ visible, data, isEdit, onClose }) => {
 
 	return (
 		<>
-			<div class="card-header">
-				<div class="card-title">Cadastro</div>
+			<div className="card-header">
+				<div className="card-title">Cadastro</div>
 			</div>
-			<div class="card-body">
+			<div className="card-body">
 				<h3>
 					<b>A paz de Deus,</b>
 				</h3>
