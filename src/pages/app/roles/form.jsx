@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 
 import { useForm } from "react-hook-form";
-import { roleSchema } from "@/modules/app/roles";
 
-import { useRoles } from "@/hooks";
+import { useRoles, roleSchema } from "@/modules/app/roles";
 
 import {
 	Modal,

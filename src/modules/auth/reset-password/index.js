@@ -1,2 +1,3 @@
 export { default as useResetPassword } from "./hooks/useResetPassword";
-export { default as userSchema } from "./schemas/reset-password";
+
+export { default as resetSchema } from "./schemas/reset-password";

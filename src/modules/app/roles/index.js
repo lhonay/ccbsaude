@@ -3,4 +3,4 @@
 
 export { default as useRoles } from "./hooks/useRoles";
 
-// export { default as userSchema } from "./schemas/users";
+export { default as userSchema } from "./schemas/roles";
