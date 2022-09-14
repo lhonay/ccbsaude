@@ -12,9 +12,9 @@ const Home = () => {
 
 			<HeaderSiteLayout />
 
-			<div class="page-inner mt--5 col-12">
-				<div class="col-md-12 col-xl-8 ml-auto mr-auto">
-					<div class="card">
+			<div className="page-inner mt--5 col-12">
+				<div className="col-md-12 col-xl-8 ml-auto mr-auto">
+					<div className="card">
 						<ScheduleInfo />
 						<hr />
 						<ScheduleForm />

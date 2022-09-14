@@ -10,7 +10,7 @@ const Modal = ({ visible, title, children, renderFooter, onClose }) => {
 				<div
 					className="modal-dialog modal-dialog-scroll modal-lg"
 					aria-hidden="true"
-					tabindex="-1"
+					// tabindex="-1"
 					role="dialog"
 					aria-labelledby="myLargeModalLabel"
 				>
