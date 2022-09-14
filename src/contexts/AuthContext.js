@@ -1,78 +1,76 @@
-import { createContext, useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { setCookie, destroyCookie, parseCookies } from 'nookies'
+import { createContext, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { setCookie, destroyCookie, parseCookies } from "nookies";
 
-import { api } from '@/services'
+import { api } from "@/services";
 
-export const AuthContext = createContext({})
+export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(false)
-    const [user, setUser] = useState(null)
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(false);
+	const [user, setUser] = useState(null);
 
-    const router = useRouter()
+	const router = useRouter();
 
-    useEffect(() => {
-        const { 'nextadmin.token': token } = parseCookies()
+	useEffect(() => {
+		const { token: token } = parseCookies();
 
-        if (token) {
-            getUser()
-        }
-    }, [])
+		if (token) {
+			getUser();
+		}
+	}, []);
 
-    async function getUser() {
-        try {
-            const { data } = await api.get('profile')
-            setUser(data)
-        } catch (error) {
-            alert(`Get user: ${error}`)
-        }
-    }
+	async function getUser() {
+		try {
+			const { data } = await api.get("profile");
+			setUser(data);
+		} catch (error) {
+			alert(`Get user: ${error}`);
+		}
+	}
 
-    async function signIn(payload) {
-        try {
-            setLoading(true)
+	async function signIn(payload) {
+		try {
+			setLoading(true);
 
-            const { access_token: token } = await api.post('login', payload)
+			const { access_token: token } = await api.post("login", payload);
 
-            setCookie(null, 'nextadmin.token', token, {
-                maxAge: 60 * 60 * 2,
-            })
+			setCookie(null, "token", token, {
+				maxAge: 60 * 60 * 2,
+			});
 
-            api.defaults.headers['Authorization'] = `Bearer ${token}`
+			api.defaults.headers["Authorization"] = `Bearer ${token}`;
 
-            await getUser()
+			await getUser();
 
-            setError(false)
+			setError(false);
 
-            router.push('/app/dashboard')
-        } catch (error) {
-            setError(true)
-        } finally {
-            setLoading(false)
-        }     
-    }
+			router.push("/app/dashboard");
+		} catch (error) {
+			setError(true);
+		} finally {
+			setLoading(false);
+		}
+	}
 
-    async function logOut() {
-        await api.delete('logout')
+	async function logOut() {
+		await api.delete("logout");
 
-        await destroyCookie(null, 'nextadmin.token')
+		await destroyCookie(null, "token");
 
-        router.push('/login')
-    }
+		router.push("/login");
+	}
 
-    const values = {
-        loading,
-        error, 
-        user, 
-        signIn,
-        logOut
-    }
+	const values = {
+		loading,
+		error,
+		user,
+		signIn,
+		logOut,
+	};
 
-    return (
-        <AuthContext.Provider value={values}>
-            {children}
-        </AuthContext.Provider>
-    )
-}
+	return (
+		<AuthContext.Provider value={values}>{children}</AuthContext.Provider>
+	);
+};

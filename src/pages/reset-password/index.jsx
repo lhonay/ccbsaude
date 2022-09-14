@@ -1,47 +1,49 @@
-import Link from 'next/link'
+import Link from "next/link";
 
-import { useForm } from 'react-hook-form'
-import { resetSchema } from '@/schemas'
+import { useForm } from "react-hook-form";
+import { resetSchema, useResetPassword } from "@/modules/auth/reset-password";
 
-import { useResetPassword } from '@/hooks'
-
-import { AuthLayout, Alert, Errors, Input, Button } from '@/components'
+import { AuthLayout, Alert, Errors, Input, Button } from "@/common/components";
 
 const ResetPassword = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm(resetSchema)
-    const { loading, success, apiErrors, resetPassword } = useResetPassword()
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm(resetSchema);
+	const { loading, success, apiErrors, resetPassword } = useResetPassword();
 
-    return (
-        <AuthLayout page='recover'>
-            <Errors errors={apiErrors} />
-            <Alert status='success' message={success} />
+	return (
+		<AuthLayout page="recover">
+			<Errors errors={apiErrors} />
+			<Alert status="success" message={success} />
 
-            <form className="mb-1" onSubmit={handleSubmit(resetPassword)}>
-                <div className="form-group">
-                    <Input 
-                        type='email'
-                        name='email'
-                        label='Email'
-                        errors={errors}
-                        register={register}
-                    />
-                </div>
+			<form className="mb-1" onSubmit={handleSubmit(resetPassword)}>
+				<div className="form-inputs">
+					<Input
+						type="email"
+						name="email"
+						label="E-mail"
+						errors={errors}
+						register={register}
+					/>
+				</div>
 
-                <div className="form-group mb-0 text-center">
-                    <Button 
-                        label={loading ? 'Reseting...' : 'Reset Password'}
-                        loading={loading}
-                    />
-                </div>
-            </form>
-                        
-            <Link href="/login">
-                <a className="text-muted">
-                    <small>Back to Sign In</small>
-                </a>
-            </Link>
-        </AuthLayout>
-    )
-}
+				<div className="form-inputs mb-0 text-center">
+					<Button
+						label={loading ? "Reseting..." : "Reset Password"}
+						loading={loading}
+					/>
+				</div>
+			</form>
 
-export default ResetPassword
+			<Link href="/login">
+				<a className="text-muted">
+					<small>Voltar para o login</small>
+				</a>
+			</Link>
+		</AuthLayout>
+	);
+};
+
+export default ResetPassword;

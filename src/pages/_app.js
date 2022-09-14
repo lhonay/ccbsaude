@@ -1,17 +1,39 @@
-import NextNProgress from 'nextjs-progressbar'
-import { AuthProvider } from '@/contexts/AuthContext'
+import { useEffect } from "react";
+import NextNProgress from "nextjs-progressbar";
 
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.min.css'
+import { AuthProvider } from "@/contexts/AuthContext";
 
-import '@/styles/globals.css'
+// import { SidebarProvider } from "@/contexts/SidebarProvider";
+// import { AuthProvider, SidebarProvider } from "@/contexts";
 
-const MyApp = ({ Component, pageProps }) => (
-    <AuthProvider>
-        <NextNProgress />
-        <ToastContainer />
-        <Component {...pageProps} />
-    </AuthProvider>
-)
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
-export default MyApp
+import * as yup from "yup";
+import translation from "@/common/locale/yup.pt-br";
+yup.setLocale(translation);
+
+import "@/assets/css/bootstrap.min.css";
+import "@/assets/css/atlantis.min.css";
+import "@/assets/css/demo.css";
+import "@/assets/css/login.css";
+
+import "react-confirm-alert/src/react-confirm-alert.css";
+
+const MyApp = ({ Component, pageProps }) => {
+	return (
+		<AuthProvider>
+			<NextNProgress
+				color="#fff"
+				startPosition={0.3}
+				stopDelayMs={200}
+				height={5}
+				showOnShallow={false}
+			/>
+			<ToastContainer />
+			<Component {...pageProps} />
+		</AuthProvider>
+	);
+};
+
+export default MyApp;
